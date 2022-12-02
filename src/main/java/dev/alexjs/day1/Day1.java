@@ -1,8 +1,10 @@
 package dev.alexjs.day1;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Day1 {
 
@@ -12,9 +14,11 @@ public class Day1 {
              InputStreamReader streamReader = new InputStreamReader(stream);
              BufferedReader reader = new BufferedReader(streamReader)) {
 
-            LinkedList<String> lines = new LinkedList<>(reader.lines().toList());
+            // Read all lines
+            List<String> lines = reader.lines().toList();
 
-            LinkedList<Integer> elves = new LinkedList<>();
+            // Sum the calories carried by each elf
+            List<Integer> elves = new ArrayList<>();
             int sum = 0;
             for (String line : lines) {
                 if (line.isBlank()) {
@@ -24,12 +28,17 @@ public class Day1 {
                 }
                 sum += Integer.parseInt(line);
             }
+            int size = elves.size();
+
+            // Sort by calories
             elves.sort(Comparator.naturalOrder());
 
-            System.out.println("Max calories: " + elves.peekLast());
+            // Puzzle 1 Answer
+            System.out.println("Max calories: " + elves.get(size - 1));
             System.out.println();
 
-            int top3 = elves.get(elves.size() - 1) + elves.get(elves.size() - 2) + elves.get(elves.size() - 3);
+            // Puzzle 2 Answer
+            int top3 = elves.get(size - 1) + elves.get(size - 2) + elves.get(size - 3);
             System.out.println("Top 3: " + top3);
 
         } catch (IOException e) {
